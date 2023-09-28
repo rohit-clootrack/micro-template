@@ -3,6 +3,7 @@
 django==4.2.5
 djangorestframework==3.14.0
 django-cors-headers==4.2.0  # https://github.com/adamchainz/django-cors-headers
+gunicorn==21.2.0
 
 # Code quality
 # ------------------------------------------------------------------------------

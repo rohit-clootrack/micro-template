@@ -8,7 +8,6 @@ services:
   django:
     build:
       context: .
-      dockerfile: ./compose/local/django/Dockerfile
     image: employeemanagement_local_django
     container_name: employeemanagement_local_django
     depends_on:
@@ -21,31 +20,3 @@ services:
     ports:
       - '8000:8000'
     command: /start
-
-  postgres:
-    build:
-      context: .
-      dockerfile: ./compose/production/postgres/Dockerfile
-    image: employeemanagement_production_postgres
-    container_name: employeemanagement_local_postgres
-    volumes:
-      - employeemanagement_local_postgres_data:/var/lib/postgresql/data
-      - employeemanagement_local_postgres_data_backups:/backups
-    env_file:
-      - ./.envs/.local/.postgres
-
-  docs:
-    image: employeemanagement_local_docs
-    container_name: employeemanagement_local_docs
-    build:
-      context: .
-      dockerfile: ./compose/local/docs/Dockerfile
-    env_file:
-      - ./.envs/.local/.django
-    volumes:
-      - ./docs:/docs:z
-      - ./config:/app/config:z
-      - ./employeemanagement:/app/employeemanagement:z
-    ports:
-      - '9000:9000'
-    command: /start-docs

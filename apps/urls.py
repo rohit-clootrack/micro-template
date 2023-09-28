@@ -26,8 +26,7 @@ urlpatterns = [
     path("", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("admin/", admin.site.urls),
-    path("employees/", views.list_employees),
-    path("employees/", views.create_employee),
-    path("employees/<int:pk>", views.update_employee),
-    path("employees/<int:pk>", views.delete_employee),
+    # Custom views
+    path("api/v1.0/employees/", views.EmployeeListView.as_view(), name="employees"),
+    path("api/v1.0/employees/<int:pk>", views.EmployeeDetailView.as_view(), name="employee"),
 ]
