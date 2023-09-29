@@ -33,6 +33,13 @@ Template app for django microservice
 
 ```
 
+### Endpoints
+* GET `/api/v1.0/employees`
+* POST `/api/v1.0/employees`
+* GET `/api/v1.0/employees/:id`
+* PUT `/api/v1.0/employees/:id`
+* DELETE `/api/v1.0/employees/:id`
+
 ## Basic Commands
 
 ### Create virtual environment and install dependencies
