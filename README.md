@@ -2,47 +2,96 @@
 
 Template app for django microservice
 
-[![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+### Folder Structure
+```
+.
+├── Dockerfile
+├── README.md
+├── apps
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── employee_management
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   ├── 0001_initial.py
+│   │   │   └── __init__.py
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── dapr.yaml
+├── db.sqlite3
+├── local.yml
+├── manage.py
+├── pyproject.toml
+├── requirements.txt
+└── setup.cfg
 
+```
 
 ## Basic Commands
 
+### Create virtual environment and install dependencies
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip3 install -r requirements.txt
+```
+
+### Run Migrations
+```
+python3 manage.py migrate
+```
+
 ### Setting Up Your Users
 
-- To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
+To create a **superuser account**, use this command:
 
-- To create a **superuser account**, use this command:
+```
+python manage.py createsuperuser
+```
 
-      $ python manage.py createsuperuser
+### Run Server
+```
+python3 manage.py runserver
+```
 
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
+### Pre-Commit Hooks
+Install pre-commit hook using the following command. After this, pre-commit hooks will be executed everytime you commit the code.
+```
+pre-commit install
+```
 
+Incase, you want to manually trigger the pre-commit hooks
+```
+pre-commit run all-files
+```
 ### Type checks
 
 Running type checks with mypy:
+```
+mypy apps/employee_management
+```
 
-    $ mypy employeemanagement
+#### Running tests with Pytest
 
+```
+python manage.py test apps.employee_management.tests
+```
 ### Test coverage
 
 To run the tests, check your test coverage, and generate an HTML coverage report:
 
-    $ coverage run -m pytest
-    $ coverage html
-    $ open htmlcov/index.html
+```commandline
 
-#### Running tests with pytest
-
-    $ python manage.py test apps.employee_management.tests
-
-## Deployment
-
-The following details how to deploy this application.
-
-### Docker
-
-See detailed [cookiecutter-django Docker documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html).
-
+coverage run -m pytest
+coverage html
+open htmlcov/index.html
+```
 
 ### DAPR
 #### Installation
