@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework import routers
 
-from apps.employee_management import views
+from employee_management.app import views
 
 router = routers.DefaultRouter()
 
@@ -27,6 +28,10 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("admin/", admin.site.urls),
     # Custom views
-    path("api/v1.0/employees/", views.EmployeeListView.as_view(), name="employees"),
-    path("api/v1.0/employees/<int:pk>", views.EmployeeDetailView.as_view(), name="employee"),
+    path("api/v1.0/employees/", views.EmployeeListCreateAPIView.as_view(), name="employees"),
+    path("api/v1.0/employees/<int:pk>", views.EmployeeRetrieveUpdateDeleteAPIView.as_view(), name="employee"),
+    # OpenAPI - Swagger
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/schema/swagger-ui/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+    path("api/schema/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
 ]

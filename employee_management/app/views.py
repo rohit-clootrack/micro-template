@@ -1,17 +1,22 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.employee_management.models import Employee
-from apps.employee_management.serializers import EmployeeSerializer
+from employee_management.app.models import Employee
+from employee_management.app.serializers import EmployeeSerializer
 
 
-class EmployeeListView(APIView):
-    @staticmethod
-    def get(request):
-        employees = Employee.objects.all()
-        serializer = EmployeeSerializer(employees, many=True)
+class EmployeeListCreateAPIView(APIView, LimitOffsetPagination):
+    def get(self, request):
+        employees_qs = Employee.objects.all()
+        page = self.paginate_queryset(employees_qs, request, view=self)
+        if page is not None:
+            serializer = EmployeeSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        # Return all the items
+        serializer = EmployeeSerializer(employees_qs, many=True)
         return Response(serializer.data)
 
     @staticmethod
@@ -23,7 +28,7 @@ class EmployeeListView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class EmployeeDetailView(APIView):
+class EmployeeRetrieveUpdateDeleteAPIView(APIView):
     @staticmethod
     def get(request, pk):
         employee = get_object_or_404(Employee, pk=pk)

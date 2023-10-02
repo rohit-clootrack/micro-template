@@ -3,7 +3,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from apps.employee_management.models import Department, Employee
+from employee_management.app.models import Department, Employee
 
 
 class EmployeeModelTestCase(TestCase):
@@ -23,7 +23,6 @@ class EmployeeAPITestCase(APITestCase):
             "email": "alice@gmail.com",
             "department_id": self.department.id,
         }
-        # self.employee = Employee.objects.create(**self.employee_data)
 
     def test_create_employee(self):
         url = reverse("employees")
