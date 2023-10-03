@@ -4,8 +4,8 @@ from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from employee_management.app.models import Employee
-from employee_management.app.serializers import EmployeeSerializer
+from employee_management.app.models.employee import Employee
+from employee_management.app.serializers.employee import EmployeeSerializer
 
 
 class EmployeeListCreateAPIView(APIView, LimitOffsetPagination):

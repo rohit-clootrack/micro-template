@@ -3,7 +3,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from employee_management.app.models import Department, Employee
+from employee_management.app.models.employee import Department, Employee
 
 
 class EmployeeModelTestCase(TestCase):

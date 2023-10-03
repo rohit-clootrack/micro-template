@@ -13,17 +13,28 @@ Template app for django microservice
 ├── employee_management
 │   ├── __init__.py
 │   ├── app
+│   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
 │   │   ├── config.py
-│   │   ├── errors.py
+│   │   ├── controllers
+│   │   │   ├── __init__.py
+│   │   │   └── employee.py
 │   │   ├── migrations
 │   │   │   ├── 0001_initial.py
 │   │   │   └── __init__.py
-│   │   ├── models.py
-│   │   ├── serializers.py
-│   │   ├── tests.py
-│   │   └── views.py
+│   │   ├── models
+│   │   │   ├── __init__.py
+│   │   │   └── employee.py
+│   │   ├── serializers
+│   │   │   ├── __init__.py
+│   │   │   └── employee.py
+│   │   ├── tests
+│   │   │   ├── __init__.py
+│   │   │   └── employee.py
+│   │   └── utils
+│   │       ├── __init__.py
+│   │       └── errors.py
 │   ├── asgi.py
 │   ├── settings.py
 │   ├── urls.py
@@ -96,7 +107,7 @@ mypy employee_management/app
 #### Running tests with Pytest
 
 ```
-python manage.py test employee_management.app.tests
+python3 manage.py test employee_management.app.tests.employee
 ```
 
 ### Test coverage
