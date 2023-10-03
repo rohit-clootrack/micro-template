@@ -4,9 +4,9 @@ metadata:
   name: employee_app
   labels:
     app: employee_app
-  namespace: dapr-demo
+#  namespace: dapr-demo
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: employee_app
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: employee_app
-        image: employee_app_image:latest
+        image: drf:latest
         env:
         - name: "APP_PORT"
           value: "8000"

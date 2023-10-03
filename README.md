@@ -52,6 +52,7 @@ Template app for django microservice
 * Pre-commit hooks
 * OpenAPI schema / Swagger
 * Pagination
+* Continuous Integration - GitHub Actions
 
 ### Endpoints
 * GET `/api/v1.0/employees`
@@ -121,12 +122,12 @@ coverage html
 open htmlcov/index.html
 ```
 
-Notes of naming stuff:
+> Notes of naming stuff:
 * Name Mold : [adjective]_[noun]_[measurement]
   * Example: Suppose you are storing maximum number of order per month. What is the variable name?
     * max_order_length
 
-[Learn More](https://www.youtube.com/watch?v=z7w2lKG8zWM&t=325s)
+    [Learn More](https://www.youtube.com/watch?v=z7w2lKG8zWM&t=325s)
 
 ### DAPR
 #### Installation
@@ -134,10 +135,24 @@ Notes of naming stuff:
 ```
 brew install dapr/tap/dapr-cli
 dapr init
-
 ```
 [This section is in Progress]
+#### Standalone Mode
+```
+dapr run --app-id employeeapp --app-port 8000 --dapr-http-port 3500 python3 manage.py runserver 8000
 
+```
+Make a request:
+```commandline
+curl http://localhost:3500/v1.0/invoke/employeeapp/method/api/v1.0/employees/
+```
+
+#### Kubernetes
+
+* Build Docker Image
+```
+docker build . -t drf:latest
+```
 
 
 ### API References
@@ -162,7 +177,7 @@ dapr init
 
 
 #### Sample Error response
-type can be `client_error`, `server_error` or `validation_error`
+**type** can be `client_error`, `server_error` or `validation_error`
 ```json
 {
     "status": "error",
