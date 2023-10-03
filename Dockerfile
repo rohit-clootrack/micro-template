@@ -1,9 +1,9 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim-buster
+FROM python:3.11-slim-bookworm
 
 # Set environment variables for Python
 ENV PYTHONUNBUFFERED 1
-ENV DJANGO_SETTINGS_MODULE your_project.settings
+ENV DJANGO_SETTINGS_MODULE employee_management.settings
 
 # Create and set the working directory
 RUN mkdir /app
