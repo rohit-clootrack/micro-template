@@ -71,9 +71,9 @@ pip3 install -r requirements.txt
 ```
 
 ### Migrations
-After adding models in models.py
+Make changes models.py to suit the needs of your app
 
-Generate migration files
+Generate migration files using the following command
 ```
 python3 manage.py makemigrations
 ```
@@ -166,7 +166,7 @@ docker build . -t neo_{{cookiecutter.project_slug}}:latest
  cp .env.sample .env
  docker-compose -f local.yml up
 ```
-
+[This section is under construction]
 
 ### API References
 
@@ -189,7 +189,9 @@ docker build . -t neo_{{cookiecutter.project_slug}}:latest
 
 
 #### Sample Error response
-**type** can be `client_error`, `server_error` or `validation_error`
+we are using `drf-standardized-errors` plugin for error response.
+
+* **type** can be `client_error`, `server_error` or `validation_error`
 ```json
 {
     "status": "error",
@@ -203,3 +205,10 @@ docker build . -t neo_{{cookiecutter.project_slug}}:latest
     ]
 }
 ```
+
+
+#### Swagger Documentation
+
+* Swagger documentation is available at `/api/schema/swagger-ui/` endpoint
+* Redoc documentation is available at `/api/schema/redoc/` endpoint
+* OpenAPI schema is available at `/api/schema/openapi.json` endpoint

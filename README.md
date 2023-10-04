@@ -50,4 +50,32 @@
        4. `python3 manage.py makemigrations`
        5. `python3 manage.py migrate`
        6. run the test command given in the README
-          - `cat README.md | grep "manage.py test`
+          - `cat README.md | grep "manage.py test"`
+
+
+### Next steps
+
+* Generated code will create 5 endpoints: CRUD APIs and a list API. It will be centered about a Model with three fields (`first_name`, `last_name` and `email`). Test cases & serializer are also designed towards this Model
+* As per the need of your project, you can modify the Model, test cases, serializer and endpoints
+    * You can add more fields to the Model and run the migration commands to create the new fields in the database
+    * You can add more endpoints by adding more functions in the `controller/{name}.py` file
+    * You may need to add more test cases in the `tests/{name}.py` file
+    * You can add more models by adding more classes in the `models/{name}.py` file
+    * You can add more serializers by adding more classes in the `serializers/{name}.py` file
+    * You can add more apps by adding more files in the `apps/` folder
+
+### Features
+* RESTful APIs
+* Standard Error message
+* Unit Tests
+* Pre-commit hooks
+* OpenAPI schema / Swagger
+* Pagination -- Limit Offset Count
+* Continuous Integration - GitHub Actions
+
+
+
+### TODO:
+* Add postgres support from default -- currently it points towards sqlite.
+* Add `environ` for reading environment variables and separate .env for staging/production.
+* Sentry support
