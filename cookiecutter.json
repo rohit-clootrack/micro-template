@@ -1,0 +1,8 @@
+{
+    "project_name": "Employee Management",
+    "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
+    "model_name": "employee",
+    "model_name_plural": "{{cookiecutter.model_name}}s",
+    "app_name": "{{cookiecutter.model_name}}_app",
+    "description": "Behold My Awesome Microservice Project!"
+  }

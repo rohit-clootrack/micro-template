@@ -3,7 +3,7 @@ FROM python:3.11-slim-bookworm
 
 # Set environment variables for Python
 ENV PYTHONUNBUFFERED 1
-ENV DJANGO_SETTINGS_MODULE employee_management.settings
+ENV DJANGO_SETTINGS_MODULE {{cookiecutter.project_slug}}.settings
 
 # Create and set the working directory
 RUN mkdir /app
@@ -14,10 +14,10 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code into the container
-COPY . /app/
+COPY .. /app/
 
 # Expose the port the application runs on
 EXPOSE 8000
 
 # Start the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "employee_management.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "{{cookiecutter.project_slug}}.wsgi:application"]

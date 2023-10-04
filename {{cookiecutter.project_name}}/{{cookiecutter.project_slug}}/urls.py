@@ -19,7 +19,7 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework import routers
 
-from employee_management.app.controllers import employee as employee_views
+from {{cookiecutter.project_slug}}.app.controllers import {{cookiecutter.model_name}} as {{cookiecutter.model_name}}_views
 
 router = routers.DefaultRouter()
 
@@ -28,8 +28,8 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("admin/", admin.site.urls),
     # Custom views
-    path("api/v1.0/employees/", employee_views.EmployeeListCreateAPIView.as_view(), name="employees"),
-    path("api/v1.0/employees/<int:pk>", employee_views.EmployeeRetrieveUpdateDeleteAPIView.as_view(), name="employee"),
+    path("api/v1.0/{{cookiecutter.model_name_plural}}/", {{cookiecutter.model_name}}_views.{{cookiecutter.model_name|title}}ListCreateAPIView.as_view(), name="{{cookiecutter.model_name_plural}}"),
+    path("api/v1.0/{{cookiecutter.model_name_plural}}/<int:pk>", {{cookiecutter.model_name}}_views.{{cookiecutter.model_name|title}}RetrieveUpdateDeleteAPIView.as_view(), name="{{cookiecutter.model_name}}"),
     # OpenAPI - Swagger
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/schema/swagger-ui/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_standardized_errors",
     "drf_spectacular",
-    "employee_management.app",
+    "{{cookiecutter.project_slug}}.app",
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 100,
 }
 
-ROOT_URLCONF = "employee_management.urls"
+ROOT_URLCONF = "{{cookiecutter.project_slug}}.urls"
 
 TEMPLATES = [
     {
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "employee_management.wsgi.application"
+WSGI_APPLICATION = "{{cookiecutter.project_slug}}.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -128,12 +128,12 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DRF_STANDARDIZED_ERRORS = {
-    "EXCEPTION_FORMATTER_CLASS": "employee_management.app.errors.CustomExceptionFormatter",
+    "EXCEPTION_FORMATTER_CLASS": "{{cookiecutter.project_slug}}.app.errors.CustomExceptionFormatter",
 }
 
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Employee Management",
-    "DESCRIPTION": "sample microservice template in DRF",
+    "TITLE": "{{cookiecutter.project_name}}",
+    "DESCRIPTION": "microservice in DRF",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS

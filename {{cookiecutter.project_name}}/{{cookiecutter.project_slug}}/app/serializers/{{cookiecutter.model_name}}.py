@@ -1,11 +1,11 @@
 from rest_framework import renderers, serializers
 
-from employee_management.app.models.employee import Employee
+from {{cookiecutter.project_slug}}.app.models.{{cookiecutter.model_name}} import {{cookiecutter.model_name|title}}
 
 
-class EmployeeSerializer(serializers.ModelSerializer):
+class {{cookiecutter.model_name|title}}Serializer(serializers.ModelSerializer):
     class Meta:
-        model = Employee
+        model = {{cookiecutter.model_name|title}}
         fields = "__all__"
 
 

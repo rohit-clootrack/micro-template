@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: employee_app
+  name: {{cookiecutter.app_name}}
   labels:
-    app: employee_app
+    app: {{cookiecutter.app_name}}
 #  namespace: dapr-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: employee_app
+      app: {{cookiecutter.app_name}}
   template:
     metadata:
       labels:
-        app: employee_app
+        app: {{cookiecutter.app_name}}
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "employee_app"
+        dapr.io/app-id: "{{cookiecutter.app_name}}"
         dapr.io/app-port: "8000"
         dapr.io/config: "appconfig"
     spec:
       containers:
-      - name: employee_app
+      - name: {{cookiecutter.app_name}}
         image: drf:latest
         env:
         - name: "APP_PORT"

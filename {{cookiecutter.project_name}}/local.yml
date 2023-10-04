@@ -1,0 +1,25 @@
+version: '3'
+
+volumes:
+  {{cookiecutter.project_slug}}_local_postgres_data: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: neo_{{cookiecutter.project_slug}}:latest
+    container_name: neo_{{cookiecutter.project_slug}}
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:z
+    ports:
+      - '8000:8000'
+
+  postgres:
+    image: postgres:15
+    volumes:
+      - {{cookiecutter.project_slug}}_local_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
