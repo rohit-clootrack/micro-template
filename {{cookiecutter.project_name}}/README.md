@@ -1,6 +1,6 @@
 # {{cookiecutter.project_name}}
 
-Template app for django microservice
+{{cookiecutter.description}}
 
 ### Folder Structure
 ```
