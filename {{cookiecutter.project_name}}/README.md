@@ -20,6 +20,9 @@
 │   │   ├── controllers
 │   │   │   ├── __init__.py
 │   │   │   └── {{cookiecutter.model_name}}.py
+│   │   ├── db_interface
+│   │   │   ├── __init__.py
+│   │   │   └── {{cookiecutter.model_name}}.py
 │   │   ├── migrations
 │   │   │   ├── 0001_initial.py
 │   │   │   └── __init__.py
@@ -71,6 +74,11 @@ pip3 install -r requirements.txt
 ```
 
 ### Migrations
+Copy the sample env file and make changes as per the environment
+```
+cp .env.sample .env
+```
+
 Make changes models.py to suit the needs of your app
 
 Generate migration files using the following command
@@ -163,8 +171,7 @@ docker build . -t neo_{{cookiecutter.project_slug}}:latest
 
 * Run docker-compose
 ```
- cp .env.sample .env
- docker-compose -f local.yml up
+ docker-compose -f local.yml up --build
 ```
 [This section is under construction]
 

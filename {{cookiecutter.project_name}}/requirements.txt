@@ -7,6 +7,8 @@ gunicorn==21.2.0
 drf-spectacular==0.26.5  # https://github.com/tfranzel/drf-spectacular
 drf-standardized-errors==0.12.5  # https://github.com/ghazi-git/drf-standardized-errors
 dapr==1.11.0  # https://github.com/dapr/python-sdk
+psycopg2-binary==2.9.9  # https://github.com/psycopg/psycopg2
+django-environ==0.11.2  # https://github.com/joke2k/django-environ
 
 # Code quality
 # ------------------------------------------------------------------------------

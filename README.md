@@ -31,15 +31,15 @@
     2. Project Slug
        - Example: "employee_management"
     3. Model Name 
-        - Name of your primary model, this will create a model and relevant files
-        - Example: "employee"  (not "employees", "Employee")
+       - Name of your primary model, this will create a model and relevant files
+       - Example: "employee"  (not "employees", "Employee")
     4. Model name in plural
-        - Example: "employees"
+       - Example: "employees"
     5. App name 
        - This will be used in Docker and DAPR to identify the application
        - Example: "employee_app"
     6. Description
-        - This will get populated in the generated README.md
+       - This will get populated in the generated README.md
 
 4. Your project repo will be generated
 5. Follow the instruction given in the README of the generate project
@@ -72,10 +72,3 @@
 * OpenAPI schema / Swagger
 * Pagination -- Limit Offset Count
 * Continuous Integration - GitHub Actions
-
-
-
-### TODO:
-* Add postgres support from default -- currently it points towards sqlite.
-* Add `environ` for reading environment variables and separate .env for staging/production.
-* Sentry support

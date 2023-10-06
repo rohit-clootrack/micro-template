@@ -20,4 +20,4 @@ COPY .. /app/
 EXPOSE 8000
 
 # Start the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "{{cookiecutter.project_slug}}.wsgi:application"]
+CMD ["sh", "start.sh"]
