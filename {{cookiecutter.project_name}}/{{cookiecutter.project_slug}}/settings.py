@@ -147,7 +147,7 @@ STATICFILES_FINDERS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DRF_STANDARDIZED_ERRORS = {
-    "EXCEPTION_FORMATTER_CLASS": "{{cookiecutter.project_slug}}.app.errors.CustomExceptionFormatter",
+    "EXCEPTION_FORMATTER_CLASS": "{{cookiecutter.project_slug}}.app.utils.errors.CustomExceptionFormatter",
 }
 
 SPECTACULAR_SETTINGS = {
