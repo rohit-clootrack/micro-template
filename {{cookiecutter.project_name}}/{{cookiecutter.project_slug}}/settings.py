@@ -60,7 +60,7 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_PAGINATION_CLASS": "{{cookiecutter.project_slug}}.app.utils.pagination.CustomLimitOffsetPagination",
     "PAGE_SIZE": 100,
 }
 

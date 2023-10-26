@@ -1,14 +1,14 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from {{cookiecutter.project_slug}}.app.models.{{cookiecutter.model_name}} import {{cookiecutter.model_name|title}}
 from {{cookiecutter.project_slug}}.app.serializers.{{cookiecutter.model_name}} import {{cookiecutter.model_name|title}}Serializer
+from {{cookiecutter.project_slug}}.app.utils.pagination import CustomLimitOffsetPagination
 
 
-class {{cookiecutter.model_name|title}}ListCreateAPIView(APIView, LimitOffsetPagination):
+class {{cookiecutter.model_name|title}}ListCreateAPIView(APIView, CustomLimitOffsetPagination):
     def get(self, request):
         {{cookiecutter.model_name}}s_qs = {{cookiecutter.model_name|title}}.objects.all()
         page = self.paginate_queryset({{cookiecutter.model_name}}s_qs, request, view=self)
