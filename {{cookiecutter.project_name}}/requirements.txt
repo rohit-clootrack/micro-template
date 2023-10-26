@@ -9,6 +9,7 @@ drf-standardized-errors==0.12.5  # https://github.com/ghazi-git/drf-standardized
 dapr==1.11.0  # https://github.com/dapr/python-sdk
 psycopg2-binary==2.9.9  # https://github.com/psycopg/psycopg2
 django-environ==0.11.2  # https://github.com/joke2k/django-environ
+loguru==0.7.2  # https://github.com/Delgan/loguru
 
 # Code quality
 # ------------------------------------------------------------------------------

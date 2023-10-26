@@ -97,7 +97,7 @@ DATABASES = {
         'PORT': env("POSTGRES_PORT"),
     }
 }
-
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -157,3 +157,4 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
 }
+FIXTURE_DIRS = [str(APPS_DIR / "fixtures")]
