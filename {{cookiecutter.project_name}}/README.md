@@ -37,7 +37,10 @@
 │   │   │   └── {{cookiecutter.model_name}}.py
 │   │   └── utils
 │   │       ├── __init__.py
-│   │       └── errors.py
+│   │       ├── errors.py
+│   │       ├── config.py
+│   │       ├── pagination.py
+│   │       └── logger.py
 │   ├── asgi.py
 │   ├── settings.py
 │   ├── urls.py
@@ -54,8 +57,10 @@
 * Unit Tests
 * Pre-commit hooks
 * OpenAPI schema / Swagger
-* Pagination -- Limit Offset Count
+* Custom Pagination -- Limit Offset Count
 * Continuous Integration - GitHub Actions
+* Logger
+
 
 ### Endpoints
 * GET `/api/v1.0/{{cookiecutter.model_name_plural}}`
@@ -64,16 +69,18 @@
 * PUT `/api/v1.0/{{cookiecutter.model_name_plural}}/:id`
 * DELETE `/api/v1.0/{{cookiecutter.model_name_plural}}/:id`
 
-## Basic Commands
+# Getting Started
 
-### Create virtual environment and install dependencies
+## Non-Docker Setup:
+
+#### Create virtual environment and install dependencies
 ```
 python3 -m venv .venv
 source .venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-### Migrations
+#### Migrations
 Copy the sample env file and make changes as per the environment
 ```
 cp .env.sample .env
@@ -91,7 +98,7 @@ Run the migration
 python3 manage.py migrate
 ```
 
-### Setting Up Your Users
+#### Setting Up Your Users
 
 To create a **superuser account**, use this command:
 
@@ -99,12 +106,57 @@ To create a **superuser account**, use this command:
 python3 manage.py createsuperuser
 ```
 
-### Run Server
+#### Run Server
 ```
 python3 manage.py runserver 8000
 ```
+#### Running tests with Pytest
 
-### Pre-Commit Hooks
+```
+python3 manage.py test {{cookiecutter.project_slug}}.app.tests.{{cookiecutter.model_name}}
+```
+
+
+## Docker Setup:
+
+1. Copy the .env file
+```
+cp .env.sample .env
+```
+
+2. Start the docker containers
+```
+docker-compose -f local.yml up --build
+```
+
+3. Shell into django's container
+```
+docker exec -it neo_{{cookiecutter.project_slug}} bash
+```
+> Note: If the name "neo_{{cookiecutter.project_slug}}" doesn't match, run `docker ps` and get the name of the django container
+
+4. Make migrations
+```
+python3 manage.py makemigrations
+```
+
+5. Run migrations
+```
+python3 manage.py migrate
+```
+
+6. [Optional] Run tests
+```
+python3 manage.py test {{cookiecutter.project_slug}}.app.tests.{{cookiecutter.model_name}}
+```
+
+7. [Optional] Create superuser for admin access
+```
+python3 manage.py createsuperuser
+```
+
+
+### Pre-Commit Hooks [Important]
 Install pre-commit hook using the following command. After this, pre-commit hooks will be executed everytime you commit the code.
 ```
 pre-commit install
@@ -114,20 +166,15 @@ Incase, you want to manually trigger the pre-commit hooks
 ```
 pre-commit run all-files
 ```
-### Type checks
+#### Type checks
 
 Running type checks with mypy:
 ```
 mypy {{cookiecutter.project_slug}}/app
 ```
 
-#### Running tests with Pytest
 
-```
-python3 manage.py test {{cookiecutter.project_slug}}.app.tests.{{cookiecutter.model_name}}
-```
-
-### Test coverage
+#### Test coverage
 
 To run the tests, check your test coverage, and generate an HTML coverage report:
 
@@ -138,14 +185,7 @@ coverage html
 open htmlcov/index.html
 ```
 
-> Notes of naming stuff:
-* Name Mold : [adjective]_[noun]_[measurement]
-  * Example: Suppose you are storing maximum number of order per month. What is the variable name?
-    * max_order_length
-
-    [Learn More](https://www.youtube.com/watch?v=z7w2lKG8zWM&t=325s)
-
-### DAPR
+## DAPR
 #### Installation
 
 ```
@@ -175,22 +215,34 @@ docker build . -t neo_{{cookiecutter.project_slug}}:latest
 ```
 [This section is under construction]
 
-### API References
+## API References
+
+#### Sample response format
+```
+{
+    "response": {
+        "data": {
+            "{{cookiecutter.model_name_plural}}": []
+        },
+    },
+    "status": "success",
+    "message": null,
+}
+```
 
 #### Sample Paginated Response
 ```json
 {
-    "count": 2,
-    "next": "http://localhost:8000/api/v1.0/{{cookiecutter.model_name_plural}}/?limit=1&offset=1",
-    "previous": null,
-    "results": [
-        {
-            "id": 1,
-            "first_name": "test",
-            "last_name": "asas",
-            "email": "asas@gmail.com",
-        }
-    ]
+    "response": {
+        "data": {},
+        "pagination": {
+            "count": 2,
+            "next": "http://localhost:8000/api/v1.0/{{cookiecutter.model_name_plural}}/?limit=1&offset=1",
+            "previous": null,
+        },
+    },
+    "status": "success",
+    "message": null,
 }
 ```
 
@@ -211,7 +263,16 @@ we are using `drf-standardized-errors` plugin for error response.
         }
     ]
 }
+
 ```
+
+
+####  Notes of naming stuff:
+* Name Mold : [adjective]_[noun]_[measurement]
+  * Example: Suppose you are storing maximum number of order per month. What is the variable name?
+    * max_order_length
+
+    [Learn More](https://www.youtube.com/watch?v=z7w2lKG8zWM&t=325s)
 
 
 #### Swagger Documentation
