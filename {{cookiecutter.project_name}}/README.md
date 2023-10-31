@@ -9,7 +9,6 @@
 ├── README.md
 ├── TODO.md
 ├── dapr.yaml
-├── db.sqlite3
 ├── {{cookiecutter.project_slug}}
 │   ├── __init__.py
 │   ├── app
@@ -158,15 +157,16 @@ python3 manage.py createsuperuser
 
 ### Pre-Commit Hooks [Important]
 Install pre-commit hook using the following command. After this, pre-commit hooks will be executed everytime you commit the code.
+> if you are following the Docker setup, please install pre-commit package locally outside docker using `pip3 install pre-commit`
 ```
 pre-commit install
 ```
 
 Incase, you want to manually trigger the pre-commit hooks
 ```
-pre-commit run all-files
+pre-commit run --all-files
 ```
-#### Type checks
+#### [Optional] Type checks
 
 Running type checks with mypy:
 ```
@@ -174,7 +174,7 @@ mypy {{cookiecutter.project_slug}}/app
 ```
 
 
-#### Test coverage
+#### [Optional] Test coverage
 
 To run the tests, check your test coverage, and generate an HTML coverage report:
 
@@ -185,7 +185,7 @@ coverage html
 open htmlcov/index.html
 ```
 
-## DAPR
+## DAPR [Optional]
 #### Installation
 
 ```
