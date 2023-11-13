@@ -28,10 +28,13 @@ logger.add(
     level="INFO",
     enqueue=True,
 )
-metadata = {"microservice_name": "{{cookiecutter.app_name}}" }
+metadata = {"microservice_name": "{{cookiecutter.app_name}}"}
 logger = logger.bind(**metadata)
 
 
 @lru_cache
 def get_logger():
     return logger
+
+
+logging = get_logger()

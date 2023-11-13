@@ -1,13 +1,17 @@
+import uuid
+
 from django.db import models
 
 
 class MetadataModel(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created_on = models.DateTimeField(auto_now_add=True, db_index=True)
     created_by = models.UUIDField(blank=True, null=True)
     updated_on = models.DateTimeField(auto_now=True, db_index=True)
     updated_by = models.UUIDField(blank=True, null=True)
     deleted_on = models.DateTimeField(blank=True, null=True, db_index=True)
     deleted_by = models.UUIDField(blank=True, null=True)
+    is_deleted = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
@@ -20,3 +24,7 @@ class {{cookiecutter.model_name | title}}(MetadataModel):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+    class Meta:
+        verbose_name_plural = "{{cookiecutter.model_name_plural | title}}"
+        db_table = "app_{{cookiecutter.model_name}}"
