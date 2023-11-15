@@ -14,7 +14,7 @@
     cookiecutter <link_to_repo/local_folder>
     ```
 
-    GitHub Repo
+    GitHub Repo [Recommended]
     ```
     cookiecutter gh:rohit-clootrack/micro-template --checkout cookiecutter
     ```
@@ -67,6 +67,7 @@
 ### Features
 * RESTful APIs
 * Standard Error message
+* Standard Response format
 * Unit Tests
 * Pre-commit hooks
 * OpenAPI schema / Swagger
