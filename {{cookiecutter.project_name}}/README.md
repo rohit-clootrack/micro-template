@@ -3,6 +3,9 @@
 {{cookiecutter.description}}
 
 ### Folder Structure
+<details>
+  <summary>Click to expand</summary>
+
 ```
 .
 ├── Dockerfile
@@ -36,6 +39,7 @@
 │   │   │   └── {{cookiecutter.model_name}}.py
 │   │   └── utils
 │   │       ├── __init__.py
+│   │       ├── responses.py
 │   │       ├── errors.py
 │   │       ├── config.py
 │   │       ├── pagination.py
@@ -50,9 +54,12 @@
 ├── requirements.txt
 └── setup.cfg
 ```
+</details>
+
 ### Features
 * RESTful APIs
 * Standard Error message
+* Standard Response format
 * Unit Tests
 * Pre-commit hooks
 * OpenAPI schema / Swagger
@@ -71,6 +78,9 @@
 # Getting Started
 
 ## Non-Docker Setup:
+
+<details>
+<summary>Click to Expand</summary>
 
 #### Create virtual environment and install dependencies
 ```
@@ -115,8 +125,11 @@ python3 manage.py runserver 8000
 python3 manage.py test {{cookiecutter.project_slug}}.app.tests.{{cookiecutter.model_name}}
 ```
 
+</details>
 
 ## Docker Setup:
+<details>
+<summary>Click to Expand</summary>
 
 1. Copy the .env file
 ```
@@ -154,10 +167,13 @@ python3 manage.py test {{cookiecutter.project_slug}}.app.tests.{{cookiecutter.mo
 python3 manage.py createsuperuser
 ```
 
+</details>
 
 ### Pre-Commit Hooks [Important]
 Install pre-commit hook using the following command. After this, pre-commit hooks will be executed everytime you commit the code.
 > if you are following the Docker setup, please install pre-commit package locally outside docker using `pip3 install pre-commit`
+
+Install pre-commit hooks using the following command
 ```
 pre-commit install
 ```
@@ -226,7 +242,7 @@ docker build . -t neo_{{cookiecutter.project_slug}}:latest
         },
     },
     "status": "success",
-    "message": null,
+    "message": "Response was successful",
 }
 ```
 
@@ -275,14 +291,17 @@ we are using `drf-standardized-errors` plugin for error response.
     [Learn More](https://www.youtube.com/watch?v=z7w2lKG8zWM&t=325s)
 
 
-#### Swagger Documentation
 
-* Swagger documentation is available at `/api/schema/swagger-ui/` endpoint
-* Redoc documentation is available at `/api/schema/redoc/` endpoint
-* OpenAPI schema is available at `/api/schema/openapi.json` endpoint
+#### custom error message
 
+* For validation error:
 
-#### example of custom exception
+```
+raise ValidationError(serializer.errors)
+```
+
+* For custom client error:
+
 ```
 raise ClientAPIExceptionHandler(
         detail=ErrorMessages.ENTITY_NOT_FOUND,
@@ -290,3 +309,28 @@ raise ClientAPIExceptionHandler(
     )
 
 ```
+
+* For server side error:
+
+```
+raise ServerAPIExceptionHandler(
+        detail=ErrorMessages.ENTITY_NOT_FOUND,
+        code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+    )
+```
+
+
+##### using logger 
+```
+from {{cookiecutter.project_slug}}.app.utils.logger import logging
+
+logging.info("This is info log message")
+logging.error("This is info log message")
+
+```
+
+#### Swagger Documentation
+
+* Swagger documentation is available at `/api/schema/swagger-ui/` endpoint
+* Redoc documentation is available at `/api/schema/redoc/` endpoint
+* OpenAPI schema is available at `/api/schema/openapi.json` endpoint
