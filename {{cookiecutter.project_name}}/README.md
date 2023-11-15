@@ -280,3 +280,13 @@ we are using `drf-standardized-errors` plugin for error response.
 * Swagger documentation is available at `/api/schema/swagger-ui/` endpoint
 * Redoc documentation is available at `/api/schema/redoc/` endpoint
 * OpenAPI schema is available at `/api/schema/openapi.json` endpoint
+
+
+#### example of custom exception
+```
+raise ClientAPIExceptionHandler(
+        detail=ErrorMessages.ENTITY_NOT_FOUND,
+        code=status.HTTP_400_BAD_REQUEST,
+    )
+
+```

@@ -9,7 +9,7 @@ LOG_FORMAT = (
     "<level>{level: <8}</level> | "
     "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - "
     "<level>{message}</level>"
-    "{extra} {exception}"
+    " {extra} {exception}"
 )
 logger.remove()
 logger.add(
@@ -27,6 +27,7 @@ logger.add(
     format=LOG_FORMAT,
     level="INFO",
     enqueue=True,
+    colorize=True,
 )
 metadata = {"microservice_name": "{{cookiecutter.app_name}}"}
 logger = logger.bind(**metadata)

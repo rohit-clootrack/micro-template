@@ -14,7 +14,7 @@ class ErrorMessages:
     INSUFFICIENT_PERMISSION = "Insufficient permissions to perform the action"
     INVALID_ACTION = "Invalid action: {action}"
     MISSING_REQUIRED_FIELDS = "Missing some mandatory fields: ({fields})"
-    
+
 
 class CustomExceptionFormatter(ExceptionFormatter):
     def format_error_response(self, error_response: ErrorResponse):
@@ -47,12 +47,3 @@ class ClientAPIExceptionHandler(BaseAPIException):
 
 class ServerAPIExceptionHandler(BaseAPIException):
     status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-
-
-# example of custom exception
-"""
-raise ClientAPIExceptionHandler(
-        detail=ErrorMessages.ENTITY_NOT_FOUND,
-        code=status.HTTP_400_BAD_REQUEST,
-    )
-"""

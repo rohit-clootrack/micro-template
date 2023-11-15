@@ -41,7 +41,8 @@ class {{cookiecutter.model_name|title}}APITestCase(APITestCase):
         url = reverse("{{cookiecutter.model_name}}", args=[{{cookiecutter.model_name}}.id])  # Replace with the correct URL name
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["first_name"], "Bob")
+        response_data = response.data["response"]["data"]
+        self.assertEqual(response_data["first_name"], "Bob")
 
     def test_update_{{cookiecutter.model_name}}(self):
         {{cookiecutter.model_name}} = {{cookiecutter.model_name|title}}.objects.create(

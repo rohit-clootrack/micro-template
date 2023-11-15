@@ -31,7 +31,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # Custom views
     path("api/v1.0/{{cookiecutter.model_name_plural}}/", {{cookiecutter.model_name}}_views.{{cookiecutter.model_name|title}}ListCreateAPIView.as_view(), name="{{cookiecutter.model_name_plural}}"),
-    path("api/v1.0/{{cookiecutter.model_name_plural}}/<int:pk>", {{cookiecutter.model_name}}_views.{{cookiecutter.model_name|title}}RetrieveUpdateDeleteAPIView.as_view(), name="{{cookiecutter.model_name}}"),
+    path("api/v1.0/{{cookiecutter.model_name_plural}}/<str:pk>", {{cookiecutter.model_name}}_views.{{cookiecutter.model_name|title}}RetrieveUpdateDeleteAPIView.as_view(), name="{{cookiecutter.model_name}}"),
     # OpenAPI - Swagger
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/schema/swagger-ui/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
