@@ -2,7 +2,16 @@ from django.db import connection
 from django_tenants.middleware import TenantMainMiddleware
 from django_tenants.postgresql_backend.base import FakeTenant
 
+from rest_framework.request import Request
+
 from {{cookiecutter.project_slug}}.app.utils.errors import UnauthorizedAPIExceptionHandler
+
+
+def set_custom_schema(request: Request, schema_name: str):
+    tenant = FakeTenant(tenant_type=None, schema_name=schema_name)
+    tenant.domain_url = schema_name
+    request.tenant = tenant
+    connection.set_tenant(request.tenant)
 
 
 class TenantCustomMiddleware(TenantMainMiddleware):
@@ -23,9 +32,5 @@ class TenantCustomMiddleware(TenantMainMiddleware):
             from django.http import JsonResponse
             return JsonResponse({"error": "X-Tenant-Id header is missing"}, status=401)
 
-        tenant = FakeTenant(tenant_type=None, schema_name=hostname)
-        tenant.domain_url = hostname
-
-        request.tenant = tenant
-        connection.set_tenant(request.tenant)
+        set_custom_schema(request, hostname)
         self.setup_url_routing(request)

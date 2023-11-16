@@ -21,6 +21,7 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework import routers
 
+from tenant.views import TenantListCreateAPIView
 from {{cookiecutter.project_slug}}.app.controllers import {{cookiecutter.model_name}} as {{cookiecutter.model_name}}_views
 
 router = routers.DefaultRouter()
@@ -29,6 +30,7 @@ urlpatterns = [
     path("", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("admin/", admin.site.urls),
+    path("create_tenant/", TenantListCreateAPIView.as_view(), name="create-tenant"),
     # Custom views
     path("api/v1.0/{{cookiecutter.model_name_plural}}/", {{cookiecutter.model_name}}_views.{{cookiecutter.model_name|title}}ListCreateAPIView.as_view(), name="{{cookiecutter.model_name_plural}}"),
     path("api/v1.0/{{cookiecutter.model_name_plural}}/<str:pk>", {{cookiecutter.model_name}}_views.{{cookiecutter.model_name|title}}RetrieveUpdateDeleteAPIView.as_view(), name="{{cookiecutter.model_name}}"),
