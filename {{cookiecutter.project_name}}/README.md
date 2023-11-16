@@ -152,17 +152,30 @@ docker exec -it neo_{{cookiecutter.project_slug}} bash
 python3 manage.py makemigrations
 ```
 
-5. Run migrations
+5. Create a tenant
+```
+python3 manage.py create_tenant
+```
+
+Answer the prompted questions. 
+`schema_name` value is one you will have to pass `X-Tenant-Id` in the header for all the requests.
+
+6. Create a superuser
+```
+python3 manage.py createsuperuser
+```
+
+7. Run migrations
 ```
 python3 manage.py migrate
 ```
 
-6. [Optional] Run tests
+8. [Optional] Run tests
 ```
 python3 manage.py test {{cookiecutter.project_slug}}.app.tests.{{cookiecutter.model_name}}
 ```
 
-7. [Optional] Create superuser for admin access
+9. [Optional] Create superuser for admin access
 ```
 python3 manage.py createsuperuser
 ```
@@ -319,8 +332,8 @@ raise ServerAPIExceptionHandler(
     )
 ```
 
+##### using logger
 
-##### using logger 
 ```
 from {{cookiecutter.project_slug}}.app.utils.logger import logging
 

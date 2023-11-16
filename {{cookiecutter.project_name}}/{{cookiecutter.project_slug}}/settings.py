@@ -35,20 +35,28 @@ ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
 # Application definition
 
-INSTALLED_APPS = [
+SHARED_APPS = [
+    "django_tenants",
+    "tenant",
+    "rest_framework",
+    "drf_standardized_errors",
+    "drf_spectacular",
+]
+
+TENANT_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",
-    "drf_standardized_errors",
-    "drf_spectacular",
     "{{cookiecutter.project_slug}}.app",
 ]
 
+INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
+
 MIDDLEWARE = [
+    "{{cookiecutter.project_slug}}.app.utils.middlewares.TenantCustomMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -57,6 +65,11 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# django-tenant properties
+TENANT_MODEL = "tenant.Tenant"
+TENANT_DOMAIN_MODEL = "tenant.Domain"
+SHOW_PUBLIC_IF_NO_TENANT_FOUND = False
 
 REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
@@ -90,15 +103,17 @@ WSGI_APPLICATION = "{{cookiecutter.project_slug}}.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        'NAME': env("POSTGRES_DB"),
-        'USER': env("POSTGRES_USER"),
-        'PASSWORD': env("POSTGRES_PASSWORD"),
-        'HOST': env('POSTGRES_HOST'),
-        'PORT': env("POSTGRES_PORT"),
+        "ENGINE": "django_tenants.postgresql_backend",
+        "NAME": env("POSTGRES_DB"),
+        "USER": env("POSTGRES_USER"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": env("POSTGRES_HOST"),
+        "PORT": env("POSTGRES_PORT"),
     }
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
