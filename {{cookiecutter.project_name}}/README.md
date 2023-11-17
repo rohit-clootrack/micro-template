@@ -110,11 +110,6 @@ python3 manage.py create_tenant
 Answer the prompted questions. 
 `schema_name` value is one you will have to pass `X-Tenant-Id` in the header for all the requests.
 
-Create a superuser
-```
-python3 manage.py createsuperuser
-```
-
 Run the migration
 ```
 python3 manage.py migrate
@@ -125,7 +120,7 @@ python3 manage.py migrate
 To create a **superuser account**, use this command:
 
 ```
-python3 manage.py createsuperuser
+python3 manage.py create_tenant_superuser
 ```
 
 #### Run Server
@@ -175,7 +170,7 @@ Answer the prompted questions.
 
 6. Create a superuser
 ```
-python3 manage.py createsuperuser
+python3 manage.py create_tenant_superuser
 ```
 
 7. Run migrations
@@ -188,10 +183,6 @@ python3 manage.py migrate
 python3 manage.py test {{cookiecutter.project_slug}}.app.tests.{{cookiecutter.model_name}}
 ```
 
-9. [Optional] Create superuser for admin access
-```
-python3 manage.py createsuperuser
-```
 
 </details>
 
