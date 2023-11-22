@@ -102,6 +102,14 @@ Generate migration files using the following command
 python3 manage.py makemigrations
 ```
 
+Create a tenant
+```
+python3 manage.py create_tenant
+```
+
+Answer the prompted questions.
+`schema_name` value is one you will have to pass `X-TENANT-ID` in the header for all the requests.
+
 Run the migration
 ```
 python3 manage.py migrate
@@ -112,7 +120,7 @@ python3 manage.py migrate
 To create a **superuser account**, use this command:
 
 ```
-python3 manage.py createsuperuser
+python3 manage.py create_tenant_superuser
 ```
 
 #### Run Server
@@ -152,20 +160,29 @@ docker exec -it neo_{{cookiecutter.project_slug}} bash
 python3 manage.py makemigrations
 ```
 
-5. Run migrations
+5. Create a tenant
+```
+python3 manage.py create_tenant
+```
+
+Answer the prompted questions.
+`schema_name` value is one you will have to pass `X-TENANT-ID` in the header for all the requests.
+
+6. Create a superuser
+```
+python3 manage.py create_tenant_superuser
+```
+
+7. Run migrations
 ```
 python3 manage.py migrate
 ```
 
-6. [Optional] Run tests
+8. [Optional] Run tests
 ```
 python3 manage.py test {{cookiecutter.project_slug}}.app.tests.{{cookiecutter.model_name}}
 ```
 
-7. [Optional] Create superuser for admin access
-```
-python3 manage.py createsuperuser
-```
 
 </details>
 
@@ -319,8 +336,8 @@ raise ServerAPIExceptionHandler(
     )
 ```
 
+##### using logger
 
-##### using logger 
 ```
 from {{cookiecutter.project_slug}}.app.utils.logger import logging
 

@@ -47,3 +47,7 @@ class ClientAPIExceptionHandler(BaseAPIException):
 
 class ServerAPIExceptionHandler(BaseAPIException):
     status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+
+
+class UnauthorizedAPIExceptionHandler(BaseAPIException):
+    status_code = status.HTTP_401_UNAUTHORIZED
