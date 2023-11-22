@@ -107,8 +107,8 @@ Create a tenant
 python3 manage.py create_tenant
 ```
 
-Answer the prompted questions. 
-`schema_name` value is one you will have to pass `X-Tenant-Id` in the header for all the requests.
+Answer the prompted questions.
+`schema_name` value is one you will have to pass `X-TENANT-ID` in the header for all the requests.
 
 Run the migration
 ```
@@ -165,8 +165,8 @@ python3 manage.py makemigrations
 python3 manage.py create_tenant
 ```
 
-Answer the prompted questions. 
-`schema_name` value is one you will have to pass `X-Tenant-Id` in the header for all the requests.
+Answer the prompted questions.
+`schema_name` value is one you will have to pass `X-TENANT-ID` in the header for all the requests.
 
 6. Create a superuser
 ```

@@ -1,10 +1,7 @@
 from django.db import connection
 from django_tenants.middleware import TenantMainMiddleware
 from django_tenants.postgresql_backend.base import FakeTenant
-
 from rest_framework.request import Request
-
-from {{cookiecutter.project_slug}}.app.utils.errors import UnauthorizedAPIExceptionHandler
 
 
 def set_custom_schema(request: Request, schema_name: str):
@@ -20,7 +17,7 @@ class TenantCustomMiddleware(TenantMainMiddleware):
         """Extracts hostname from request. Used for custom requests filtering.
         By default removes the request's port and common prefixes.
         """
-        hostname = request.headers.get("X-Tenant-Id", None)
+        hostname = request.headers.get("X-TENANT-ID", None)
         return hostname
 
     def process_request(self, request):
@@ -30,7 +27,8 @@ class TenantCustomMiddleware(TenantMainMiddleware):
         hostname = self.hostname_from_request(request)
         if not hostname:
             from django.http import JsonResponse
-            return JsonResponse({"error": "X-Tenant-Id header is missing"}, status=401)
+
+            return JsonResponse({"error": "X-TENANT-ID header is missing"}, status=401)
 
         set_custom_schema(request, hostname)
         self.setup_url_routing(request)

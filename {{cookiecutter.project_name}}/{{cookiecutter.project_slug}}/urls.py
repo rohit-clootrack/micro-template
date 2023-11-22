@@ -30,7 +30,7 @@ urlpatterns = [
     path("", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("admin/", admin.site.urls),
-    path("create_tenant/", TenantListCreateAPIView.as_view(), name="create-tenant"),
+    path("api/v1.0/create_tenant/", TenantListCreateAPIView.as_view(), name="create-tenant"),
     # Custom views
     path("api/v1.0/{{cookiecutter.model_name_plural}}/", {{cookiecutter.model_name}}_views.{{cookiecutter.model_name|title}}ListCreateAPIView.as_view(), name="{{cookiecutter.model_name_plural}}"),
     path("api/v1.0/{{cookiecutter.model_name_plural}}/<str:pk>", {{cookiecutter.model_name}}_views.{{cookiecutter.model_name|title}}RetrieveUpdateDeleteAPIView.as_view(), name="{{cookiecutter.model_name}}"),
