@@ -1,25 +1,26 @@
-from django.test import TestCase
+from django.test import Client
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase
+from django_tenants.test.cases import TenantTestCase
 
 from {{cookiecutter.project_slug}}.app.models.{{cookiecutter.model_name}} import {{cookiecutter.model_name|title}}
 
 
-class {{cookiecutter.model_name|title}}ModelTestCase(TestCase):
+class {{cookiecutter.model_name|title}}ModelTestCase(TenantTestCase):
     def test_{{cookiecutter.model_name}}_creation(self):
         {{cookiecutter.model_name}} = {{cookiecutter.model_name|title}}.objects.create(first_name="John", last_name="Doe")
         self.assertEqual({{cookiecutter.model_name}}.first_name, "John")
         self.assertEqual({{cookiecutter.model_name}}.last_name, "Doe")
 
 
-class {{cookiecutter.model_name|title}}APITestCase(APITestCase):
+class {{cookiecutter.model_name|title}}APITestCase(TenantTestCase):
     def setUp(self):
         self.{{cookiecutter.model_name}}_data = {
             "first_name": "Alice",
             "last_name": "Johnson",
             "email": "alice@gmail.com",
         }
+        self.client = Client(headers={"X-TENANT-ID": super().get_test_schema_name()})
 
     def test_create_{{cookiecutter.model_name}}(self):
         url = reverse("{{cookiecutter.model_name_plural}}")
